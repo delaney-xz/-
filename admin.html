@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>অ্যাডমিন প্যানেল — রুফাইদা অনলাইন শপ</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@600;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<header class="bar">
+  <div class="inner">
+    <b class="logo">🧸 অ্যাডমিন প্যানেল</b>
+    <span id="status" class="status">ড্রাফট সংরক্ষিত</span>
+    <a href="index.html" target="_blank" class="lnk">ওয়েবসাইট দেখুন ↗</a>
+  </div>
+  <nav class="tabs inner">
+    <button data-tab="list" class="on">📦 সব পণ্য</button>
+    <button data-tab="form">➕ নতুন পণ্য</button>
+    <button data-tab="cats">🏷️ ক্যাটেগরি</button>
+    <button data-tab="shop">🏪 দোকানের তথ্য</button>
+    <button data-tab="pub">🚀 প্রকাশ করুন</button>
+  </nav>
+</header>
+
+<main class="inner">
+
+  <!-- পণ্য তালিকা -->
+  <section id="tab-list" class="panel on">
+    <div class="head"><h2>আপনার পণ্য <span id="count"></span></h2>
+      <button class="btn pri" data-go="form">➕ নতুন পণ্য যোগ করুন</button></div>
+    <div id="plist"></div>
+  </section>
+
+  <!-- পণ্য ফর্ম -->
+  <section id="tab-form" class="panel">
+    <h2 id="formTitle">নতুন পণ্য যোগ করুন</h2>
+    <form id="pform" autocomplete="off">
+      <div class="field">
+        <label>ছবি (একাধিক দিতে পারবেন, প্রথম ছবিটি কভার হবে)</label>
+        <div class="drop" id="drop">
+          <input type="file" id="files" accept="image/*" multiple hidden>
+          <button type="button" class="btn" id="pick">📷 ছবি বেছে নিন</button>
+          <span>অথবা ছবি এখানে টেনে ছেড়ে দিন</span>
+        </div>
+        <div id="imgs" class="imgs"></div>
+        <div class="row">
+          <input id="imgUrl" placeholder="অথবা ছবির লিংক (URL) পেস্ট করুন">
+          <button type="button" class="btn" id="addUrl">লিংক যোগ করুন</button>
+        </div>
+      </div>
+      <div class="field"><label>পণ্যের নাম *</label><input id="f-name" required placeholder="যেমন: লাল রঙের পার্টি ফ্রক"></div>
+      <div class="two">
+        <div class="field"><label>বর্তমান দাম (টাকা) *</label><input id="f-price" type="number" min="0" required placeholder="850"></div>
+        <div class="field"><label>আগের দাম (ঐচ্ছিক, ছাড় দেখাতে)</label><input id="f-old" type="number" min="0" placeholder="1050"></div>
+      </div>
+      <div class="field"><label>ক্যাটেগরি</label><select id="f-cat"></select></div>
+      <div class="field"><label>কোন কোন বয়সের জন্য?</label>
+        <div class="ageBox" id="f-ages"></div>
+        <button type="button" class="mini" id="allAges">সব বয়স বেছে নিন</button>
+      </div>
+      <div class="field"><label>রং (ঐচ্ছিক)</label><input id="f-colors" placeholder="যেমন: লাল, নীল, গোলাপি"></div>
+      <div class="field"><label>বিবরণ (ঐচ্ছিক)</label><textarea id="f-desc" rows="4" placeholder="কাপড়ের ধরন, সাইজ, বিশেষত্ব..."></textarea></div>
+      <div class="checks">
+        <label><input type="checkbox" id="f-stock" checked> স্টকে আছে</label>
+        <label><input type="checkbox" id="f-new"> "নতুন" ব্যাজ দেখান</label>
+      </div>
+      <div class="row end">
+        <button type="button" class="btn" id="cancel">বাতিল</button>
+        <button type="submit" class="btn pri" id="saveBtn">✔ পণ্য সংরক্ষণ করুন</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- ক্যাটেগরি -->
+  <section id="tab-cats" class="panel">
+    <h2>ক্যাটেগরি</h2>
+    <div id="catList" class="catList"></div>
+    <div class="row"><input id="newCat" placeholder="নতুন ক্যাটেগরির নাম"><button class="btn pri" id="addCat">যোগ করুন</button></div>
+  </section>
+
+  <!-- দোকানের তথ্য -->
+  <section id="tab-shop" class="panel">
+    <h2>দোকানের তথ্য</h2>
+    <div class="field"><label>দোকানের নাম</label><input data-s="shopName"></div>
+    <div class="field"><label>ট্যাগলাইন</label><input data-s="tagline"></div>
+    <div class="field"><label>হোয়াটসঅ্যাপ নম্বর (দেশের কোডসহ, যেমন 8801712345678)</label><input data-s="whatsapp" inputmode="numeric"></div>
+    <div class="field"><label>ফোন নম্বর</label><input data-s="phone"></div>
+    <div class="field"><label>ফেসবুক পেজের লিংক</label><input data-s="facebook" placeholder="https://facebook.com/..."></div>
+    <div class="field"><label>ঠিকানা</label><input data-s="address"></div>
+    <div class="field"><label>ডেলিভারির লেখা</label><input data-s="deliveryNote"></div>
+    <p class="hint">পরিবর্তন নিজে থেকেই ড্রাফটে সংরক্ষিত হয়। ওয়েবসাইটে দেখাতে "প্রকাশ করুন" ট্যাবে যান।</p>
+  </section>
+
+  <!-- প্রকাশ -->
+  <section id="tab-pub" class="panel">
+    <h2>ওয়েবসাইটে প্রকাশ করুন</h2>
+    <p class="hint">এখানে করা সব পরিবর্তন প্রথমে শুধু এই ব্রাউজারে ড্রাফট হিসেবে থাকে। দুইভাবে লাইভ করতে পারেন:</p>
+
+    <div class="box">
+      <h3>🅰️ সরাসরি GitHub-এ প্রকাশ (সবচেয়ে সহজ)</h3>
+      <div class="two">
+        <div class="field"><label>GitHub ইউজারনেম</label><input id="g-owner" placeholder="yourname"></div>
+        <div class="field"><label>রিপোজিটরির নাম</label><input id="g-repo" placeholder="rufaida-shop"></div>
+      </div>
+      <div class="two">
+        <div class="field"><label>ব্রাঞ্চ</label><input id="g-branch" value="main"></div>
+        <div class="field"><label>অ্যাক্সেস টোকেন</label><input id="g-token" type="password" placeholder="github_pat_..."></div>
+      </div>
+      <label class="chk"><input type="checkbox" id="g-remember"> এই ডিভাইসে মনে রাখুন (শুধু নিজের ফোন/কম্পিউটারে)</label>
+      <button class="btn pri" id="ghPublish">🚀 GitHub-এ প্রকাশ করুন</button>
+      <details><summary>টোকেন কীভাবে বানাবেন?</summary>
+        <ol>
+          <li>GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens</li>
+          <li>Generate new token → শুধু আপনার এই রিপোজিটরিটি সিলেক্ট করুন</li>
+          <li>Permissions → Repository permissions → <b>Contents: Read and write</b></li>
+          <li>টোকেন কপি করে এখানে পেস্ট করুন। টোকেন কাউকে দেবেন না।</li>
+        </ol>
+      </details>
+    </div>
+
+    <div class="box">
+      <h3>🅱️ ফাইল ডাউনলোড করে নিজে আপলোড</h3>
+      <p class="hint">একটি zip ফাইল নামবে। এটি খুলে ভেতরের <code>data.js</code> ও <code>images</code> ফোল্ডার GitHub রিপোজিটরিতে আপলোড করুন (পুরনো data.js রিপ্লেস হবে)।</p>
+      <button class="btn" id="dlZip">⬇ আপডেট zip ডাউনলোড</button>
+    </div>
+
+    <div class="box">
+      <h3>⚙️ আরও</h3>
+      <button class="btn" id="resetDraft">ড্রাফট মুছে ওয়েবসাইটের বর্তমান তথ্য লোড করুন</button>
+    </div>
+    <pre id="log" class="log" hidden></pre>
+  </section>
+</main>
+
+<div id="toast" class="toast"></div>
+<script src="data.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
